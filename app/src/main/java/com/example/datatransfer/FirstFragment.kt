@@ -6,11 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.datatransfer.databinding.FragmentFirstBinding
 
 class FirstFragment : Fragment() {
     private lateinit var binding: FragmentFirstBinding
+
+    private val mainViewModel by activityViewModels<MainViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,6 +28,7 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.button.setOnClickListener {
+            mainViewModel.data = "Hello"
             findNavController().navigate(R.id.action_firstFragment_to_secondFragment)
         }
     }
