@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.datatransfer.databinding.FragmentFirstBinding
@@ -28,7 +30,10 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.button.setOnClickListener {
-            mainViewModel.data = "Hello"
+            setFragmentResult(
+                "requestKey",
+                bundleOf("data" to "hello")
+            )
             findNavController().navigate(R.id.action_firstFragment_to_secondFragment)
         }
     }
