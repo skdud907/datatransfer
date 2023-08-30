@@ -16,10 +16,14 @@ class FirstFragment : Fragment() {
     private lateinit var binding: FragmentFirstBinding
 
     val requestPermission = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { granted ->
-        if (granted) {
-            Toast.makeText(requireContext(), "성공", Toast.LENGTH_SHORT).show()
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { map ->
+        if (map[android.Manifest.permission.ACCESS_FINE_LOCATION]!!) {
+            Toast.makeText(requireContext(), "ACCESS_FINE_LOCATION 성공", Toast.LENGTH_SHORT).show()
+        }
+
+        if (map[android.Manifest.permission.CAMERA]!!) {
+            Toast.makeText(requireContext(), "CAMERA 성공", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -35,7 +39,10 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.button.setOnClickListener {
-            requestPermission.launch(android.Manifest.permission.ACCESS_FINE_LOCATION)
+            requestPermission.launch(arrayOf(
+                android.Manifest.permission.ACCESS_FINE_LOCATION,
+                android.Manifest.permission.CAMERA
+            ))
         }
     }
 }
