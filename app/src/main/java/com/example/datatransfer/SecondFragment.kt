@@ -26,20 +26,9 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setFragmentResultListener("requestKey") { requestKey, bundle ->
-            val data = bundle.getString("data", "")
-
-            Toast.makeText(requireContext(), data, Toast.LENGTH_SHORT).show()
-        }
-
 
         binding.button2.setOnClickListener {
-            setFragmentResult(
-                "requestKey",
-                bundleOf("data" to "hello")
-            )
 
-            findNavController().navigate(R.id.action_secondFragment_to_firstFragment)
         }
     }
 
